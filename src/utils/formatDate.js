@@ -1,4 +1,5 @@
 export const formatDate = date => {
+  console.log(date);
   const options = {
     year: 'numeric',
     month: 'numeric',
