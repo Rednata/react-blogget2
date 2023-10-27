@@ -21,7 +21,7 @@ export const Tabs = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDrpodown, setIsDropdown] = useState(true);
 
-  const handleResize = () => {
+  const handleResize1 = () => {
     if (document.documentElement.clientWidth < 768) {
       console.log('<768');
       setIsDropdown(true);
@@ -31,13 +31,26 @@ export const Tabs = () => {
     }
   };
 
+  const queryResize = () => {
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
+    mediaQuery.addListener((e) => {
+      if (e.matches) {
+        setIsDropdown(false);
+      } else {
+        setIsDropdown(true);
+      }
+    });
+  };
+
   useEffect(() => {
-    const debounceResize = debounceRaf(handleResize);
-    debounceResize();
-    window.addEventListener('resize', debounceResize);
-    return () => {
-      window.removeEventListener('resize', debounceResize);
-    };
+    queryResize();
+
+    // const debounceResize = debounceRaf(handleResize);
+    // debounceResize();
+    // window.addEventListener('resize', debounceResize);
+    // return () => {
+    //   window.removeEventListener('resize', debounceResize);
+    // };
   });
 
   return (
