@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import style from './Main.module.css';
 import Layout from '../Layout';
 import Tabs from './Tabs';
@@ -8,8 +9,8 @@ export const Main = props => {
   return (
     <main className={style.main}>
       <Layout>
-        <Tabs></Tabs>
-        <List></List>
+        <Tabs />
+        <List />
       </Layout>
     </main>);
 };
