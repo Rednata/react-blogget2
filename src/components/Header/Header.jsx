@@ -3,7 +3,7 @@ import Layout from '../Layout';
 import Logo from './Logo';
 import Search from './Search';
 import Auth from './Auth';
-import {Heading} from './Heading/Heading';
+import { Heading } from './Heading/Heading';
 
 export const Header = props => {
   console.log();

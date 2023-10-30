@@ -1,25 +1,30 @@
+/* eslint-disable new-cap */
 /* eslint-disable no-unused-vars */
 import style from './Tabs.module.css';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { assignID } from '../../../utils/randomKey';
 import { ReactComponent as ArrowIcon } from './img/arrow.svg';
-import { ReactComponent as EyeIcon } from './img/eye.svg';
 import { ReactComponent as HomeIcon } from './img/home.svg';
-import { ReactComponent as PostIcon } from './img/post.svg';
-import { ReactComponent as SaveIcon } from './img/save.svg';
+import { ReactComponent as TopIcon } from './img/top.svg';
+import { ReactComponent as BestIcon } from './img/best.svg';
+import { ReactComponent as HotIcon } from './img/hot.svg';
 import { debounceRaf } from '../../../utils/debounce';
+import { Svg } from '../../../UI/SVG/Svg';
 
 export const Tabs = () => {
+  const HomeIcon1 = Svg('./img/home.svg');
+
   const LIST = [
-    { value: 'Главная', Icon: EyeIcon },
-    { value: 'Сохраненное', Icon: HomeIcon },
-    { value: 'Просмотренное', Icon: PostIcon },
-    { value: 'Мои посты', Icon: SaveIcon },
+    { value: 'Главная', Icon: HomeIcon },
+    { value: 'Топ', Icon: TopIcon },
+    { value: 'Лучшие', Icon: BestIcon },
+    { value: 'Горячие', Icon: HotIcon },
   ].map(assignID);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDrpodown, setIsDropdown] = useState(true);
+  const [titleMenu, setTitleMenu] = useState('Главная');
 
   // const handleResize = () => {
   //   if (document.documentElement.clientWidth < 768) {
@@ -43,6 +48,10 @@ export const Tabs = () => {
     });
   };
 
+  const handleClickList = () => {
+
+  };
+
   useEffect(() => {
     queryResize();
 
@@ -60,7 +69,7 @@ export const Tabs = () => {
         <button
           className={style.btn}
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        >Add Item
+        >{titleMenu}
           <ArrowIcon width={15} height={15}/>
         </button>
       </div>}
@@ -70,7 +79,9 @@ export const Tabs = () => {
         onClick={() => setIsDropdownOpen(false)}
       >
         {LIST.map(({ value, id, Icon }) => (
-          <li className={style.item} key={id}>
+          <li className={style.item} key={id}
+            onClick={() => setTitleMenu(value)}
+          >
             <button
               className={style.btn}
             >{value}
