@@ -49,6 +49,7 @@
   --greyBF: hsl(0, 0%, 75%);
   --grey99: hsl(0, 0%, 60%);
   --grey66: hsl(0, 0%, 40%);
+  --grey2d: #2d2d2d;
 }
 
 html {

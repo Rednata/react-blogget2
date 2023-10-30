@@ -14,7 +14,7 @@ export const Post = ({ postData }) => {
     <li className={style.post}>
       <Thumbnail title={title}/>
       <DeleteBtn />
-      <Content author={author}/>
+      <Content author={author} title={title}/>
       <Rating ups={ups}/>
       <Time date={date}/>
     </li>);

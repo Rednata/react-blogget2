@@ -21,15 +21,16 @@ export const Tabs = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDrpodown, setIsDropdown] = useState(true);
 
-  const handleResize1 = () => {
-    if (document.documentElement.clientWidth < 768) {
-      console.log('<768');
-      setIsDropdown(true);
-    } else {
-      console.log('>>>768');
-      setIsDropdown(false);
-    }
-  };
+  // const handleResize = () => {
+  //   if (document.documentElement.clientWidth < 768) {
+  //     console.log('<768');
+  //     setIsDropdown(true);
+  //   } else {
+  //     console.log('>>>768');
+  //     setIsDropdown(false);
+  //   }
+  // };
+
 
   const queryResize = () => {
     const mediaQuery = window.matchMedia('(min-width: 768px)');

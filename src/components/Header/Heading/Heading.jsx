@@ -1,9 +1,21 @@
-/* eslint-disable react/prop-types */
 import style from './Heading.module.css';
+import PropTypes from 'prop-types';
+import { Text } from '../../../UI/Text/Text';
 
-export const Heading = ({text}) => {
+export const Heading = ({ text }) => {
   console.log();
   return (
-    <h1 className={style.heading}>{text}
-    </h1>);
+    <Text
+      As='h1'
+      className={style.heading}
+      size={22}
+      tsize={26}
+      center
+    >
+      {text}
+    </Text>);
+};
+
+Heading.propTypes = {
+  text: PropTypes.string,
 };
