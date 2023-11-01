@@ -5,11 +5,12 @@ import style from './Auth.module.css';
 import { ReactComponent as LoginIcon } from './img/login.svg';
 import { urlAuth } from '../../../api/auth';
 import { Text } from '../../../UI/Text/Text';
-import { useEffect, useState } from 'react';
-import { URL_API } from '../../../api/const';
+import { useState } from 'react';
+import { useAuth } from '../../../hooks/useAuth';
 
 export const Auth = ({ token, delToken }) => {
-  const [auth, setAuth] = useState({});
+  const [auth] = useAuth(token);
+  console.log('auth: ', auth);
   const [showLogout, setShowLogout] = useState(false);
 
   const getOut = () => {
@@ -22,19 +23,6 @@ export const Auth = ({ token, delToken }) => {
     delToken();
   };
 
-  useEffect(() => {
-    if (!token) return;
-    fetch(`${URL_API}/api/v1/me`, {
-      headers: {
-        Authorization: `bearer ${token}`
-      }
-    }).then(response => response.json())
-      .then(({ name, icon_img: iconImg }) => {
-        const img = iconImg.replace(/\?.*$/, '');
-        setAuth({ name, img });
-        console.log('auth', auth);
-      });
-  }, [token]);
 
   return (
     <div className={style.container}>
