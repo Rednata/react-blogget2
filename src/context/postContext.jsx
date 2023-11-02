@@ -6,7 +6,6 @@ export const postContext = React.createContext([]);
 
 export const PostsContextProvider = ({ children }) => {
   const posts = usePosts([]);
-  console.log('posts: ', posts);
 
   return (
     <postContext.Provider value={posts}>

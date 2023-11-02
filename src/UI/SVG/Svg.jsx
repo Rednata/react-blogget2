@@ -1,3 +1,3 @@
 export const Svg = prop => {
-  console.log(prop);
+  // console.log(prop);
 };

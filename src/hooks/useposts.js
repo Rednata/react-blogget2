@@ -8,7 +8,6 @@ export const usePosts = () => {
 
   useEffect(() => {
     try {
-      console.log('!!!!!!!!!!');
       fetch(`${URL_API}/best`, {
         headers: {
           Authorization: `bearer ${token}`

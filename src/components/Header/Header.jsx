@@ -6,7 +6,7 @@ import Auth from './Auth';
 import { Heading } from './Heading/Heading';
 
 export const Header = () => {
-  console.log(13);
+  console.log();
   return (
     <header className={style.header}>
       <Layout >

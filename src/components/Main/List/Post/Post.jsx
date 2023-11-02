@@ -9,14 +9,11 @@ import Time from './Time';
 
 
 export const Post = ({ postData }) => {
-  const { title, author, ups, created } = postData;
-  console.log('created: ', created);
-  console.log('ups: ', ups);
-  console.log('author: ', author);
-  console.log('title: ', title);
+  const { title, author, ups, created, thumbnail } = postData;
+
   return (
     <li className={style.post}>
-      <Thumbnail title={title}/>
+      <Thumbnail title={title} thumbnail={thumbnail}/>
       <DeleteBtn />
       <Content author={author} title={title}/>
       <Rating ups={ups}/>
