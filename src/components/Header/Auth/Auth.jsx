@@ -5,22 +5,22 @@ import style from './Auth.module.css';
 import { ReactComponent as LoginIcon } from './img/login.svg';
 import { urlAuth } from '../../../api/auth';
 import { Text } from '../../../UI/Text/Text';
-import { useState } from 'react';
-import { useAuth } from '../../../hooks/useAuth';
+import { useState, useContext } from 'react';
+import { tokenContext } from '../../../context/tokenContext';
+import { authContext } from '../../../context/authContext';
 
-export const Auth = ({ token, delToken }) => {
-  const [auth] = useAuth(token);
-  console.log('auth: ', auth);
+export const Auth = () => {
+  const { delToken } = useContext(tokenContext);
+  const { auth, clearAuth } = useContext(authContext);
   const [showLogout, setShowLogout] = useState(false);
 
   const getOut = () => {
-    console.log(111);
     setShowLogout(true);
   };
 
   const logOut = () => {
-    console.log(222);
     delToken();
+    clearAuth();
   };
 
 
@@ -59,7 +59,7 @@ export const Auth = ({ token, delToken }) => {
     </div>);
 };
 
-Auth.propTypes = {
-  token: PropTypes.string,
-  delToken: PropTypes.func,
-};
+// Auth.propTypes = {
+//   token: PropTypes.string,
+//   delToken: PropTypes.func,
+// };
