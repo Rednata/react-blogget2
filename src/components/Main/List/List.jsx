@@ -1,9 +1,17 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 import style from './List.module.css';
 import Post from './Post';
-import { assignID } from '../../../utils/randomKey';
+import { assignID, getRandomKey } from '../../../utils/randomKey';
+import { useContext } from 'react';
+import { postContext } from '../../../context/postContext';
 
 export const List = () => {
+  const posts = useContext(postContext);
+  console.log('data: ', posts);
+
+  console.log('posts: ', posts);
+
   const postData = [
     {
       thumbnail: '',
@@ -44,9 +52,18 @@ export const List = () => {
   ].map(item => assignID(item));
 
   return (
+    posts &&
     <ul className={style.list}>
-      {postData.map(post =>
-        <Post postData={post} key={post.id} />
+      {posts.map(({ data }) =>
+        <Post postData={data} key={getRandomKey()} />
       )}
-    </ul>);
+    </ul>
+  );
 };
+
+
+{/* <ul className={style.list}>
+  {postData.map(post =>
+    <Post postData={post} key={post.id} />
+  )}
+</ul>); */}

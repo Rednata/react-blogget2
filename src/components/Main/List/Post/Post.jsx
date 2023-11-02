@@ -9,14 +9,18 @@ import Time from './Time';
 
 
 export const Post = ({ postData }) => {
-  const { title, author, ups, date } = postData;
+  const { title, author, ups, created } = postData;
+  console.log('created: ', created);
+  console.log('ups: ', ups);
+  console.log('author: ', author);
+  console.log('title: ', title);
   return (
     <li className={style.post}>
       <Thumbnail title={title}/>
       <DeleteBtn />
       <Content author={author} title={title}/>
       <Rating ups={ups}/>
-      <Time date={date}/>
+      <Time date={created * 1000}/>
     </li>);
 };
 

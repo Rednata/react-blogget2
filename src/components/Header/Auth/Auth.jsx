@@ -11,6 +11,7 @@ import { authContext } from '../../../context/authContext';
 
 export const Auth = () => {
   const { delToken } = useContext(tokenContext);
+
   const { auth, clearAuth } = useContext(authContext);
   const [showLogout, setShowLogout] = useState(false);
 
