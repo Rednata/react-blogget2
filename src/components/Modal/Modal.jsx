@@ -1,15 +1,29 @@
+/* eslint-disable no-unused-vars */
 import style from './Modal.module.css';
 import { ReactComponent as CloseIcon } from './img/close.svg';
 import PropTypes from 'prop-types';
 import Markdown from 'markdown-to-jsx';
 import ReactDOM from 'react-dom';
 import { useEffect, useRef } from 'react';
+import { useCommentsData } from '../../hooks/useCommentsData';
+import Comments from './Comments';
+import FormComment from './FormComment';
 
-export const Modal = ({ author, title, markdown, closeModal }) => {
+export const Modal = ({ id, closeModal }) => {
+  // author, title, markdown,
   const overlayRef = useRef(null);
+  const [post, comments] = useCommentsData(id);
+  console.log('post: ', post);
+  console.log('comments: ', comments);
+
+  let author;
+  let title;
+  if (post) {
+    author = post.author;
+    title = post.title;
+  }
 
   const handleClick = e => {
-    console.log('overlay!');
     const target = e.target;
     if (target === overlayRef.current) {
       closeModal();
@@ -28,21 +42,9 @@ export const Modal = ({ author, title, markdown, closeModal }) => {
     <div className={style.overlay} ref={overlayRef}>
       <div className={style.modal}>
         <h2 className={style.title}>{title}</h2>
-        <div className={style.content}>
-          <Markdown options={{
-            overrides: {
-              a: {
-                props: {
-                  target: '_blank',
-                }
-              }
-            }
-          }}>
-            {markdown}
-          </Markdown>
-        </div>
         <p className={style.author}>{author}</p>
-
+        <FormComment />
+        <Comments comments={comments}/>
         <button className={style.close}>
           <CloseIcon />
         </button>
@@ -52,8 +54,6 @@ export const Modal = ({ author, title, markdown, closeModal }) => {
 };
 
 Modal.propTypes = {
-  author: PropTypes.string,
-  title: PropTypes.string,
-  markdown: PropTypes.string,
+  id: PropTypes.string,
   closeModal: PropTypes.func,
 };

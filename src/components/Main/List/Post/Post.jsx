@@ -16,13 +16,14 @@ export const Post = ({ postData }) => {
     ups,
     selftext: markdown,
     created,
+    id
   } = postData;
 
   return (
     <li className={style.post}>
       <Thumbnail title={title} thumbnail={thumbnail}/>
       <DeleteBtn />
-      <Content author={author} title={title} markdown={markdown}/>
+      <Content author={author} title={title} markdown={markdown} id={id}/>
       <Rating ups={ups}/>
       <Time date={created * 1000}/>
     </li>);
