@@ -9,7 +9,6 @@ import Time from './Time';
 
 
 export const Post = ({ postData }) => {
-  console.log(postData);
   const {
     thumbnail,
     title,

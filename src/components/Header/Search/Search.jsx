@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import style from './Search.module.css';
+// import { useRef } from 'react';
 
 export const Search = props => {
   console.log();
