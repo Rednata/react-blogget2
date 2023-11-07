@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars */
-// import React from 'react';
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
+import { commentContext } from '../../../context/commentContext';
 import style from './FormComment.module.css';
 
 export const FormComment = props => {
   const textareaRef = useRef(null);
 
   const [isShowForm, setIsShowForm] = useState(false);
+
+  const { value, setValue } = useContext(commentContext);
 
   const showForm = () => {
     setIsShowForm(true);
@@ -17,7 +19,11 @@ export const FormComment = props => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log(textareaRef.current.value);
+    console.log(value);
+  };
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
   };
 
   return (
@@ -34,6 +40,8 @@ export const FormComment = props => {
             ref={textareaRef}
             rows={5}
             cols={40}
+            value={value}
+            onChange={handleChange}
           >
           </textarea>
           <button className={style.btn}>Submit</button>
