@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from 'react';
 import { URL_API } from '../api/const';
-import { tokenContext } from '../context/tokenContext';
+import { useSelector } from 'react-redux';
 
 export const useCommentsData = (id) => {
-  const { token } = useContext(tokenContext);
+  const token = useSelector(state => state.token);
   const [info, setComments] = useState([]);
 
   useEffect(() => {

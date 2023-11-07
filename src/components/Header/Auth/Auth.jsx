@@ -1,17 +1,12 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
-import PropTypes from 'prop-types';
 import style from './Auth.module.css';
 import { ReactComponent as LoginIcon } from './img/login.svg';
 import { urlAuth } from '../../../api/auth';
 import { Text } from '../../../UI/Text/Text';
 import { useState, useContext } from 'react';
-import { tokenContext } from '../../../context/tokenContext';
 import { authContext } from '../../../context/authContext';
 
 export const Auth = () => {
-  const { delToken } = useContext(tokenContext);
-
   const { auth, clearAuth } = useContext(authContext);
   const [showLogout, setShowLogout] = useState(false);
 
@@ -20,7 +15,7 @@ export const Auth = () => {
   };
 
   const logOut = () => {
-    delToken();
+    // delToken();
     clearAuth();
   };
 
@@ -59,8 +54,3 @@ export const Auth = () => {
       }
     </div>);
 };
-
-// Auth.propTypes = {
-//   token: PropTypes.string,
-//   delToken: PropTypes.func,
-// };
