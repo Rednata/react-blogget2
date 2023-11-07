@@ -3,21 +3,23 @@ import Main from './components/Main';
 import { TokenContextProvider } from './context/tokenContext';
 import { AuthContextProvider } from './context/authContext';
 import { PostsContextProvider } from './context/postContext';
-import { CommentContextProvider } from './context/commentContext';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
-function App() {
+const App = () => {
+  console.log();
   return (
-    <TokenContextProvider>
-      <AuthContextProvider>
-        <PostsContextProvider>
-          <CommentContextProvider>
+    <Provider store={store}>
+      <TokenContextProvider>
+        <AuthContextProvider>
+          <PostsContextProvider>
             <Header />
             <Main />
-          </CommentContextProvider>
-        </PostsContextProvider>
-      </AuthContextProvider>
-    </TokenContextProvider>
+          </PostsContextProvider>
+        </AuthContextProvider>
+      </TokenContextProvider>
+    </Provider>
   );
-}
+};
 
 export default App;

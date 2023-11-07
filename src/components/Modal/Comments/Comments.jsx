@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { getRandomKey } from '../../../utils/randomKey';
 
 export const Comments = ({ comments }) => {
-  console.log(comments);
   if (!comments) {
     return (
       <p>Загрузка...</p>

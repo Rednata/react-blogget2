@@ -13,8 +13,6 @@ export const Modal = ({ id, closeModal }) => {
   // author, title, markdown,
   const overlayRef = useRef(null);
   const [post, comments] = useCommentsData(id);
-  console.log('post: ', post);
-  console.log('comments: ', comments);
 
   let author;
   let title;

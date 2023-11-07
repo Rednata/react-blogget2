@@ -1,14 +1,16 @@
 /* eslint-disable no-unused-vars */
-import { useContext, useRef, useState } from 'react';
-import { commentContext } from '../../../context/commentContext';
+import { useRef, useState } from 'react';
 import style from './FormComment.module.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateComment } from '../../../store/index';
 
 export const FormComment = props => {
+  const value = useSelector(state => state.comment);
+
+  const dispatch = useDispatch();
+
   const textareaRef = useRef(null);
-
   const [isShowForm, setIsShowForm] = useState(false);
-
-  const { value, setValue } = useContext(commentContext);
 
   const showForm = () => {
     setIsShowForm(true);
@@ -23,7 +25,7 @@ export const FormComment = props => {
   };
 
   const handleChange = (e) => {
-    setValue(e.target.value);
+    dispatch(updateComment(e.target.value));
   };
 
   return (
