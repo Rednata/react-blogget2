@@ -7,7 +7,7 @@ export const useAuth = () => {
 
   const clearAuth = () => setAuth({});
 
-  const token = useSelector(state => state.token);
+  const token = useSelector(state => state.token.token);
 
   useEffect(() => {
     if (!token) return;
