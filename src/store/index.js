@@ -1,5 +1,6 @@
 import { createStore } from 'redux';
 import { getToken, setToken } from '../api/token';
+import { composeWithDevTools } from '@redux-devtools/extension';
 
 const initialState = {
   comment: 'Hello, Redux',
@@ -13,6 +14,16 @@ export const updateComment = comment => ({
   type: UPDATE_COMMENT,
   comment,
 });
+
+export const updateToken = token => ({
+  type: UPDATE_TOKEN,
+  token,
+});
+
+export const deleteToken = () => ({
+  type: DELETE_TOKEN,
+});
+
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -38,4 +49,4 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, composeWithDevTools());
