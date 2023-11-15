@@ -11,6 +11,7 @@ import { deleteToken } from '../../../store/tokenReducer';
 export const Auth = () => {
   const dispatch = useDispatch();
   const { auth, clearAuth } = useContext(authContext);
+
   const [showLogout, setShowLogout] = useState(false);
 
   const getOut = () => {
