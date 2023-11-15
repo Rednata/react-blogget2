@@ -1,3 +1,7 @@
+import { URL_API } from '../../api/const';
+import axios from 'axios';
+import { deleteToken } from '../tokenReducer';
+
 export const AUTH_REQUEST = 'AUTH_REQUEST';
 export const AUTH_REQUEST_SUCCESS = 'AUTH_REQUEST_SUCCESS';
 export const AUTH_REQUEST_ERROR = 'AUTH_REQUEST_ERROR';
@@ -20,3 +24,29 @@ export const authRequestError = (error) => ({
 export const authLogout = () => ({
   type: AUTH_LOGOUT,
 });
+
+export const authRequestAsync = () => (dispatch, getState) => {
+  const token = getState().token.token;
+  if (!token) return;
+
+  dispatch(authRequest());
+
+  // try {
+  axios(`${URL_API}/api/v1/me`, {
+    headers: {
+      Authorization: `bearer ${token}`
+    }
+  })
+    .then(({ data: { name, icon_img: iconImg } }) => {
+      const img = iconImg.replace(/\?.*$/, '');
+      const data = { name, img };
+      // setAuth(data);
+      dispatch(authRequestSuccess(data));
+    })
+    .catch(error => {
+      console.log(error);
+      dispatch(deleteToken);
+      // setAuth({});
+      dispatch(authRequestError(error.toString()));
+    });
+};
