@@ -20,7 +20,6 @@ export const commentsRequestError = (error) => ({
 });
 
 export const commentsRequestAsync = (id) => (dispatch, getState) => {
-  console.log('id: ', id);
   const token = getState().token.token;
 
   dispatch(commentsRequest());

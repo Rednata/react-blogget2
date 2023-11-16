@@ -7,9 +7,17 @@ import { assignID, getRandomKey } from '../../../utils/randomKey';
 // import { postContext } from '../../../context/postContext';
 import { usePosts } from '../../../hooks/useposts';
 import Loader from '../../../UI/Loader';
+import { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { postsRequestAsync } from '../../../store/posts/postsAction';
 
 export const List = () => {
   const [posts, loading] = usePosts();
+  const endList = useRef(null);
+  const dispatch = useDispatch();
+
+  console.log('posts: ', posts);
+  // console.log(endList.current);
 
   const postData = [
     {
@@ -50,6 +58,25 @@ export const List = () => {
     }
   ].map(item => assignID(item));
 
+  useEffect(() => {
+    console.log('inside');
+    console.log(endList.current);
+  }, [endList.current]
+  );
+
+  // useEffect(() => {
+  //   if (!posts.length) return;
+  //   const observer = new IntersectionObserver((entries) => {
+  //     if (entries[0].isIntersecting) {
+  //       dispatch(postsRequestAsync());
+  //     }
+  //   }, {
+  //     rootMargin: '50px',
+  //   });
+
+  //   observer.observe(endList.current);
+  // }, [endList.current]);
+
   return (
     loading ? <Loader size='200px'/> :
     posts &&
@@ -57,6 +84,7 @@ export const List = () => {
       {posts.map(({ data }) =>
         <Post postData={data} key={getRandomKey()} />
       )}
+      <li ref={endList} className={style.end}/>
     </ul>
   );
 };

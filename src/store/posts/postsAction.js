@@ -11,7 +11,8 @@ const postRequest = () => ({
 
 const postRequestSuccess = (data) => ({
   type: POSTS_REQUEST_SUCCESS,
-  data: data.children,
+  posts: data.children,
+  after: data.after
 });
 
 const postRequestError = (error) => ({
@@ -21,16 +22,17 @@ const postRequestError = (error) => ({
 
 export const postsRequestAsync = () => (dispatch, getState) => {
   const token = getState().token.token;
+  const after = getState().posts.after;
 
   dispatch(postRequest());
 
-  axios(`${URL_API}/best`, {
+  axios(`${URL_API}/best?limit=5&${after ? `after=${after}` : ''}`, {
     headers: {
       Authorization: `bearer ${token}`
     }
   })
-    .then(({ data: { data } }) => {
-      dispatch(postRequestSuccess(data));
+    .then(({ data }) => {
+      dispatch(postRequestSuccess(data.data));
     })
     .catch(error => {
       dispatch(postRequestError(error));

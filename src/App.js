@@ -1,6 +1,6 @@
 import Header from './components/Header';
 import Main from './components/Main';
-import { PostsContextProvider } from './context/postContext';
+// import { PostsContextProvider } from './context/postContext';
 import { useDispatch } from 'react-redux';
 import { updateToken } from './store/tokenReducer';
 import { getToken } from './api/token';
@@ -25,10 +25,10 @@ const App = () => {
   // store.dispatch(time());
 
   return (
-    <PostsContextProvider>
+    <>
       <Header />
       <Main />
-    </PostsContextProvider>
+    </>
   );
 };
 
