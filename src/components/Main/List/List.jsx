@@ -3,11 +3,13 @@
 import style from './List.module.css';
 import Post from './Post';
 import { assignID, getRandomKey } from '../../../utils/randomKey';
-import { useContext } from 'react';
-import { postContext } from '../../../context/postContext';
+// import { useContext } from 'react';
+// import { postContext } from '../../../context/postContext';
+import { usePosts } from '../../../hooks/useposts';
+import Loader from '../../../UI/Loader';
 
 export const List = () => {
-  const posts = useContext(postContext);
+  const [posts, loading] = usePosts();
 
   const postData = [
     {
@@ -49,6 +51,7 @@ export const List = () => {
   ].map(item => assignID(item));
 
   return (
+    loading ? <Loader size='200px'/> :
     posts &&
     <ul className={style.list}>
       {posts.map(({ data }) =>

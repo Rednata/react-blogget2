@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteToken } from '../../../store/tokenReducer';
 import { useAuth } from '../../../hooks/useAuth';
-import { AuthLoader } from './AuthLoader/AuthLoader';
+import Loader from '../../../UI/Loader';
 
 export const Auth = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export const Auth = () => {
 
   return (
     <div className={style.container}>
-      {loading ? (<AuthLoader />
+      {loading ? (<Loader size='30px'/>
       ) : auth.name ? (
         <>
           <button className={style.btn} onClick={getOut}>

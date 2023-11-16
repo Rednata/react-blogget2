@@ -8,18 +8,18 @@ import { useEffect, useRef } from 'react';
 import { useCommentsData } from '../../hooks/useCommentsData';
 import Comments from './Comments';
 import FormComment from './FormComment';
+import Loader from '../../UI/Loader';
 
 export const Modal = ({ id, closeModal }) => {
-  // author, title, markdown,
   const overlayRef = useRef(null);
-  const [post, comments] = useCommentsData(id);
+  const [post, comments, status] = useCommentsData(id);
 
-  let author;
-  let title;
-  if (post) {
-    author = post.author;
-    title = post.title;
-  }
+  // let author;
+  // let title;
+  // if (post) {
+  //   author = post.author;
+  //   title = post.title;
+  // }
 
   const handleClick = e => {
     const target = e.target;
@@ -39,10 +39,16 @@ export const Modal = ({ id, closeModal }) => {
     // <div className={style.overlay} ref={overlayRef} onClick={handleClick}>
     <div className={style.overlay} ref={overlayRef}>
       <div className={style.modal}>
-        <h2 className={style.title}>{title}</h2>
-        <p className={style.author}>{author}</p>
-        <FormComment />
-        <Comments comments={comments}/>
+        {status === 'loading' && <Loader size='150px' />}
+        {status === 'loaded' &&
+          <>
+            <h2 className={style.title}>{post.title}</h2>
+            <p className={style.author}>{post.author}</p>
+            <FormComment />
+            <Comments comments={comments}/>
+          </>
+        }
+        {status === 'error' && <p>Ошибка загрузки</p>}
         <button className={style.close}>
           <CloseIcon />
         </button>
