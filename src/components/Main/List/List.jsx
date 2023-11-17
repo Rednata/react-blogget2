@@ -8,16 +8,19 @@ import { assignID, getRandomKey } from '../../../utils/randomKey';
 import { usePosts } from '../../../hooks/useposts';
 import Loader from '../../../UI/Loader';
 import { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { postsRequestAsync } from '../../../store/posts/postsAction';
 
 export const List = () => {
-  const [posts, loading] = usePosts();
+  const posts = useSelector(state => state.posts.posts);
+  const loading = useSelector(state => state.posts.loading);
+  // const [posts, loading] = usePosts();
+
   const endList = useRef(null);
   const dispatch = useDispatch();
 
   console.log('posts: ', posts);
-  // console.log(endList.current);
+
 
   const postData = [
     {
@@ -59,33 +62,38 @@ export const List = () => {
   ].map(item => assignID(item));
 
   useEffect(() => {
-    console.log('inside');
-    console.log(endList.current);
-  }, [endList.current]
-  );
+    console.log(1);
 
-  // useEffect(() => {
-  //   if (!posts.length) return;
-  //   const observer = new IntersectionObserver((entries) => {
-  //     if (entries[0].isIntersecting) {
-  //       dispatch(postsRequestAsync());
-  //     }
-  //   }, {
-  //     rootMargin: '50px',
-  //   });
+    if (!endList.current) {
+      console.log('endList.current: ', endList.current);
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        // console.log();
+        dispatch(postsRequestAsync());
+      }
+    }, {
+      rootMargin: '50px',
+    });
+    observer.observe(endList.current);
 
-  //   observer.observe(endList.current);
-  // }, [endList.current]);
+    return () => {
+      if (endList.current) {
+        observer.unobserve(endList.current);
+      }
+    };
+  }, [endList.current]);
 
   return (
     loading ? <Loader size='200px'/> :
     posts &&
-    <ul className={style.list}>
+    (<ul className={style.list}>
       {posts.map(({ data }) =>
         <Post postData={data} key={getRandomKey()} />
       )}
       <li ref={endList} className={style.end}/>
-    </ul>
+    </ul>)
   );
 };
 

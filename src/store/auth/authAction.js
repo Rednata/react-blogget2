@@ -40,7 +40,6 @@ export const authRequestAsync = () => (dispatch, getState) => {
     .then(({ data: { name, icon_img: iconImg } }) => {
       const img = iconImg.replace(/\?.*$/, '');
       const data = { name, img };
-      // setAuth(data);
       dispatch(authRequestSuccess(data));
     })
     .catch(error => {
